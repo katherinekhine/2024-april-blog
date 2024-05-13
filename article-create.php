@@ -38,27 +38,9 @@ include("./component/header.php"); ?>
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
                         <!-- error start -->
-                        <div>
-                            <ul class="text-danger">
-                                <?php
-                                // if (isset($error)) {
-                                //     if ($error) {
-                                //         foreach ($error as $err) {
-                                //             echo "<li>" . $err . "</li>";
-                                //         }
-                                //     }
-                                // }
-                                ?>
-
-                                <?php if (isset($error)) : ?>
-                                    <?php if ($error) : ?>
-                                        <?php foreach ($error as $err) : ?>
-                                            <li><?php echo $err; ?></li>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
+                        <?php
+                        include 'error.php';
+                        ?>
                         <!-- error end -->
                         <div class="my-3">
                             <label for="title" class="fw-bold">Title:</label>
