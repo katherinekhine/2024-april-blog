@@ -18,10 +18,21 @@ if (isset($_POST['register'])) {
 
     if (!$error) {
         $password = md5($password);
-        $query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+
+        $query = "SELECT * FROM users WHERE email = '$email'";
         $result = mysqli_query($conn, $query);
         if ($result) {
-            header("Location: login.php");
+            if (mysqli_num_rows($result) > 0) {
+                $error[] = "Email is already exist.";
+            } else {
+                $query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+                $result = mysqli_query($conn, $query);
+                if ($result) {
+                    header("Location: login.php");
+                } else {
+                    echo mysqli_connect_error();
+                }
+            }
         } else {
             echo mysqli_connect_error();
         }
